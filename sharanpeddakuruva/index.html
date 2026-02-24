@@ -11,7 +11,7 @@
       --surface: #141414;
       --border: #222;
       --text: #e8e8e8;
-      --muted: #888;
+      --muted: #aaa;
       --accent: #e8c97a;
       --accent-dim: rgba(232, 201, 122, 0.08);
     }
@@ -21,7 +21,7 @@
       --surface: #f0ece6;
       --border: #e0d9d0;
       --text: #1a1a1a;
-      --muted: #555;
+      --muted: #444;
       --accent: #a07830;
       --accent-dim: rgba(160, 120, 48, 0.07);
     }
@@ -64,7 +64,7 @@
     .hero { padding: 72px 0 56px; opacity: 0; transform: translateY(16px); animation: fadeUp 0.7s ease forwards 0.1s; }
     .hero h1 { font-family: 'DM Serif Display', serif; font-size: clamp(2.2rem, 5vw, 3rem); font-weight: 400; line-height: 1.15; margin-bottom: 24px; letter-spacing: -0.02em; }
     .hero h1 em { font-style: italic; color: var(--accent); }
-    .hero-bio { color: var(--muted); font-size: 1rem; max-width: 580px; line-height: 1.85; }
+    .hero-bio { color: var(--text); font-size: 1rem; max-width: 580px; line-height: 1.85; }
     .hero-bio strong { color: var(--text); font-weight: 500; }
 
     .hero-links { margin-top: 32px; display: flex; gap: 20px; flex-wrap: wrap; }
@@ -88,7 +88,7 @@
     .exp-period { font-family: 'DM Mono', monospace; font-size: 0.75rem; color: var(--muted); white-space: nowrap; }
     .exp-company { font-size: 0.88rem; color: var(--accent); margin: 4px 0 10px; }
     .exp-bullets { list-style: none; margin-top: 10px; display: flex; flex-direction: column; gap: 6px; }
-    .exp-bullets li { font-size: 0.9rem; color: var(--muted); line-height: 1.7; padding-left: 16px; position: relative; }
+    .exp-bullets li { font-size: 0.9rem; color: var(--text); line-height: 1.7; padding-left: 16px; position: relative; }
     .exp-bullets li::before { content: '—'; position: absolute; left: 0; color: var(--border); }
     .exp-bullets li strong { color: var(--text); font-weight: 500; }
 
@@ -108,7 +108,7 @@
     .list-item { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 8px; padding: 14px 0; border-top: 1px solid var(--border); }
     .list-item:last-child { border-bottom: 1px solid var(--border); }
     .list-item-main { font-size: 0.9rem; color: var(--text); }
-    .list-item-sub { font-size: 0.82rem; color: var(--muted); margin-top: 2px; }
+    .list-item-sub { font-size: 0.82rem; color: var(--text); margin-top: 2px; }
     .badge { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--accent); background: var(--accent-dim); border: 1px solid rgba(232,201,122,0.2); padding: 2px 8px; border-radius: 2px; white-space: nowrap; }
 
     footer { padding: 32px 0 48px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
@@ -189,7 +189,7 @@
         </div>
         <div class="exp-company">IGT — International Game Technology · Columbus, OH</div>
         <ul class="exp-bullets">
-          <li>Led cloud infrastructure team architecting scalable AWS solutions and establishing standardized practices across 100+ dev teams.</li>
+          <li>Led cloud infrastructure team architecting scalable AWS solutions and establishing standardized practices across dev teams.</li>
           <li>Spearheaded <strong>Internal Developer Platform (IDP)</strong> using Backstage and AWS Service Catalog — reduced environment provisioning from days to hours.</li>
           <li>Implemented <strong>FinOps strategies</strong> via Terraform standardization, cutting monthly AWS spend by 15%.</li>
           <li>Integrated automated security scanning into GitHub Actions pipelines for enterprise compliance.</li>
