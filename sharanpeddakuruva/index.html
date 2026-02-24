@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Venkata Sharan</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0e0e0e;
+      --surface: #141414;
+      --border: #222;
+      --text: #e8e8e8;
+      --muted: #888;
+      --accent: #e8c97a;
+      --accent-dim: rgba(232, 201, 122, 0.08);
+    }
+
+    :root.light {
+      --bg: #f9f7f4;
+      --surface: #f0ece6;
+      --border: #e0d9d0;
+      --text: #1a1a1a;
+      --muted: #555;
+      --accent: #a07830;
+      --accent-dim: rgba(160, 120, 48, 0.07);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+      font-size: 18px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 999;
+      opacity: 0.4;
+    }
+
+    a { color: var(--accent); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.2s, color 0.2s; }
+    a:hover { border-bottom-color: var(--accent); }
+
+    .container { max-width: 680px; margin: 0 auto; padding: 0 24px; }
+
+    nav { padding: 32px 0 0; display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 12px; }
+    .nav-name { font-family: 'DM Serif Display', serif; font-size: 1.1rem; color: var(--text); border-bottom: none; }
+    .nav-name:hover { border-bottom: none; opacity: 0.8; }
+    .nav-links { display: flex; gap: 24px; flex-wrap: wrap; }
+    .nav-links a { font-size: 0.85rem; color: var(--muted); letter-spacing: 0.04em; text-transform: uppercase; border-bottom: none; }
+    .nav-links a:hover { color: var(--text); border-bottom: none; }
+
+    .hero { padding: 72px 0 56px; opacity: 0; transform: translateY(16px); animation: fadeUp 0.7s ease forwards 0.1s; }
+    .hero h1 { font-family: 'DM Serif Display', serif; font-size: clamp(2.2rem, 5vw, 3rem); font-weight: 400; line-height: 1.15; margin-bottom: 24px; letter-spacing: -0.02em; }
+    .hero h1 em { font-style: italic; color: var(--accent); }
+    .hero-bio { color: var(--muted); font-size: 1rem; max-width: 580px; line-height: 1.85; }
+    .hero-bio strong { color: var(--text); font-weight: 500; }
+
+    .hero-links { margin-top: 32px; display: flex; gap: 20px; flex-wrap: wrap; }
+    .hero-links a { font-family: 'DM Mono', monospace; font-size: 0.78rem; color: var(--muted); letter-spacing: 0.05em; border-bottom: 1px solid var(--border); padding-bottom: 2px; }
+    .hero-links a:hover { color: var(--accent); border-color: var(--accent); }
+
+    .divider { height: 1px; background: var(--border); margin: 8px 0; }
+
+    section { padding: 48px 0; opacity: 0; transform: translateY(12px); animation: fadeUp 0.6s ease forwards; }
+    section:nth-of-type(1) { animation-delay: 0.2s; }
+    section:nth-of-type(2) { animation-delay: 0.35s; }
+    section:nth-of-type(3) { animation-delay: 0.5s; }
+    section:nth-of-type(4) { animation-delay: 0.6s; }
+
+    .section-label { font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 28px; }
+
+    .exp-item { padding: 24px 0; border-top: 1px solid var(--border); }
+    .exp-item:last-child { border-bottom: 1px solid var(--border); }
+    .exp-header { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 8px; }
+    .exp-role { font-size: 1rem; font-weight: 500; color: var(--text); }
+    .exp-period { font-family: 'DM Mono', monospace; font-size: 0.75rem; color: var(--muted); white-space: nowrap; }
+    .exp-company { font-size: 0.88rem; color: var(--accent); margin: 4px 0 10px; }
+    .exp-bullets { list-style: none; margin-top: 10px; display: flex; flex-direction: column; gap: 6px; }
+    .exp-bullets li { font-size: 0.9rem; color: var(--muted); line-height: 1.7; padding-left: 16px; position: relative; }
+    .exp-bullets li::before { content: '—'; position: absolute; left: 0; color: var(--border); }
+    .exp-bullets li strong { color: var(--text); font-weight: 500; }
+
+    .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+    @media (max-width: 520px) { .skills-grid { grid-template-columns: 1fr; } }
+
+    .skill-group { padding: 20px; background: var(--surface); border: 1px solid var(--border); }
+    .skill-group:first-child { border-radius: 6px 0 0 0; }
+    .skill-group:nth-child(2) { border-radius: 0 6px 0 0; }
+    .skill-group:nth-last-child(2) { border-radius: 0 0 0 6px; }
+    .skill-group:last-child { border-radius: 0 0 6px 0; }
+    .skill-group-title { font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .tag { font-size: 0.78rem; color: var(--text); background: var(--accent-dim); border: 1px solid rgba(232,201,122,0.15); padding: 3px 10px; border-radius: 3px; }
+
+    .list-items { display: flex; flex-direction: column; }
+    .list-item { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 8px; padding: 14px 0; border-top: 1px solid var(--border); }
+    .list-item:last-child { border-bottom: 1px solid var(--border); }
+    .list-item-main { font-size: 0.9rem; color: var(--text); }
+    .list-item-sub { font-size: 0.82rem; color: var(--muted); margin-top: 2px; }
+    .badge { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--accent); background: var(--accent-dim); border: 1px solid rgba(232,201,122,0.2); padding: 2px 8px; border-radius: 2px; white-space: nowrap; }
+
+    footer { padding: 32px 0 48px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+    footer span { font-family: 'DM Mono', monospace; font-size: 0.72rem; color: var(--muted); }
+
+    @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+
+    .theme-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 100;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-family: "DM Mono", monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      padding: 6px 14px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: color 0.2s, border-color 0.2s, background 0.3s;
+    }
+    .theme-toggle:hover { color: var(--accent); border-color: var(--accent); }
+  </style>
+</head>
+<body>
+  <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">☀ Light</button>
+  <script>
+    function toggleTheme() {
+      const isLight = document.documentElement.classList.toggle("light");
+      document.getElementById("themeBtn").textContent = isLight ? "● Dark" : "☀ Light";
+      localStorage.setItem("theme", isLight ? "light" : "dark");
+    }
+    if (localStorage.getItem("theme") === "light") {
+      document.documentElement.classList.add("light");
+    }
+  </script>
+  <div class="container">
+
+    <nav>
+      <a href="/" class="nav-name">Venkata Sharan</a>
+      <div class="nav-links">
+        <a href="#experience">Experience</a>
+        <a href="#skills">Skills</a>
+        <a href="#education">Education</a>
+        <a href="mailto:sharanp.2911@gmail.com">Contact</a>
+      </div>
+    </nav>
+
+    <div class="hero">
+      <h1>Senior DevOps &amp;<br/><em>Cloud Infrastructure</em> Lead</h1>
+      <p class="hero-bio">
+        10+ years automating mission-critical cloud deployments and building
+        <strong>Internal Developer Platforms</strong> at enterprise scale.
+        Currently at <strong>IGT</strong>, leading cloud infrastructure for development teams
+        across multi-account AWS environments — Kubernetes, GitOps, and DevSecOps transformations.
+        Reduced deployment times by <strong>40%</strong> and AWS spend by <strong>15%</strong> through FinOps-driven Terraform standardization.
+      </p>
+      <div class="hero-links">
+        <a href="https://linkedin.com/in/venkat-sharan-53441615b" target="_blank">LinkedIn ↗</a>
+        <a href="https://medium.com/@sharan14" target="_blank">Medium ↗</a>
+        <a href="mailto:sharanp.2911@gmail.com">sharanp.2911@gmail.com</a>
+        <a href="tel:+16146156295">+1 614-615-6295</a>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- EXPERIENCE -->
+    <section id="experience">
+      <div class="section-label">Experience</div>
+
+      <div class="exp-item">
+        <div class="exp-header">
+          <span class="exp-role">Software Engineer IV — DevOps</span>
+          <span class="exp-period">Aug 2022 — Present</span>
+        </div>
+        <div class="exp-company">IGT — International Game Technology · Columbus, OH</div>
+        <ul class="exp-bullets">
+          <li>Led cloud infrastructure team architecting scalable AWS solutions and establishing standardized practices across 100+ dev teams.</li>
+          <li>Spearheaded <strong>Internal Developer Platform (IDP)</strong> using Backstage and AWS Service Catalog — reduced environment provisioning from days to hours.</li>
+          <li>Implemented <strong>FinOps strategies</strong> via Terraform standardization, cutting monthly AWS spend by 15%.</li>
+          <li>Integrated automated security scanning into GitHub Actions pipelines for enterprise compliance.</li>
+          <li>Established continuous delivery patterns using <strong>ArgoCD</strong> for EKS clusters across multiple AWS accounts.</li>
+        </ul>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-header">
+          <span class="exp-role">Senior DevOps Engineer</span>
+          <span class="exp-period">Nov 2021 — Jul 2022</span>
+        </div>
+        <div class="exp-company">EXPRESS · Columbus, OH</div>
+        <ul class="exp-bullets">
+          <li>Managed production Kubernetes environments using Rancher, streamlining microservices deployment.</li>
+          <li>Enhanced observability by implementing <strong>Istio service mesh</strong> and defining critical SLOs/SLIs.</li>
+          <li>Deployed scalable, resilient multi-region infrastructure for high-traffic e-commerce workloads.</li>
+        </ul>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-header">
+          <span class="exp-role">DevOps Engineer</span>
+          <span class="exp-period">Oct 2020 — Nov 2021</span>
+        </div>
+        <div class="exp-company">T-Mobile (United Software Group) · Reston, VA</div>
+        <ul class="exp-bullets">
+          <li>Automated AWS infrastructure using CloudFormation and Python-based Lambda functions for incident remediation.</li>
+          <li>Engineered complex <strong>ETL workflows</strong> using AWS Glue and Step Functions to process S3 data into Athena.</li>
+          <li>Maintained private Kubernetes environments and optimized cluster scaling for peak traffic loads.</li>
+        </ul>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-header">
+          <span class="exp-role">AWS / Solutions Engineer</span>
+          <span class="exp-period">Apr 2017 — Oct 2020</span>
+        </div>
+        <div class="exp-company">Nationwide Insurance (United Software Group) · Columbus, OH</div>
+        <ul class="exp-bullets">
+          <li>Deployed containerized applications on <strong>Amazon EKS</strong> and managed lifecycle using Helm charts.</li>
+          <li>Developed reproducible IaC using Terraform and CloudFormation to eliminate environment drift.</li>
+          <li>Automated configuration management with Ansible, <strong>reducing manual touchpoints by 60%</strong>.</li>
+          <li>Developed Java API to interface with Amazon SQS for managing high-volume messaging services.</li>
+        </ul>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-header">
+          <span class="exp-role">Cloud Engineer</span>
+          <span class="exp-period">Aug 2016 — Mar 2017</span>
+        </div>
+        <div class="exp-company">Aita Consulting Services · New Jersey</div>
+        <ul class="exp-bullets">
+          <li>Provided cloud infrastructure support and managed initial AWS environment configurations.</li>
+          <li>Assisted in migration of legacy workloads to cloud-native architectures.</li>
+        </ul>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- SKILLS -->
+    <section id="skills">
+      <div class="section-label">Skills &amp; Technologies</div>
+      <div class="skills-grid">
+        <div class="skill-group">
+          <div class="skill-group-title">Cloud</div>
+          <div class="skill-tags">
+            <span class="tag">AWS</span>
+            <span class="tag">GCP</span>
+            <span class="tag">EKS</span>
+            <span class="tag">Lambda</span>
+            <span class="tag">EC2</span>
+            <span class="tag">S3</span>
+            <span class="tag">RDS</span>
+            <span class="tag">VPC</span>
+            <span class="tag">Glue</span>
+            <span class="tag">Step Functions</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-title">Containers &amp; Orchestration</div>
+          <div class="skill-tags">
+            <span class="tag">Kubernetes</span>
+            <span class="tag">Docker</span>
+            <span class="tag">Istio</span>
+            <span class="tag">Helm</span>
+            <span class="tag">Rancher</span>
+            <span class="tag">ArgoCD</span>
+            <span class="tag">Karpenter</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-title">IaC &amp; CI/CD</div>
+          <div class="skill-tags">
+            <span class="tag">Terraform</span>
+            <span class="tag">CloudFormation</span>
+            <span class="tag">Ansible</span>
+            <span class="tag">GitHub Actions</span>
+            <span class="tag">Jenkins</span>
+            <span class="tag">CodePipeline</span>
+            <span class="tag">Python</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-title">Observability</div>
+          <div class="skill-tags">
+            <span class="tag">Prometheus</span>
+            <span class="tag">Grafana</span>
+            <span class="tag">Datadog</span>
+            <span class="tag">New Relic</span>
+            <span class="tag">Splunk</span>
+            <span class="tag">CloudWatch</span>
+            <span class="tag">EFK Stack</span>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top: 40px;">
+        <div class="section-label">Certifications</div>
+        <div class="list-items">
+          <div class="list-item">
+            <span class="list-item-main">AWS Certified Solutions Architect – Associate</span>
+            <span class="badge">AWS</span>
+          </div>
+          <div class="list-item">
+            <span class="list-item-main">GCP Professional Cloud Architect</span>
+            <span class="badge">GCP</span>
+          </div>
+          <div class="list-item">
+            <span class="list-item-main">Certified Kubernetes Administrator (CKA)</span>
+            <span class="badge">CNCF</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- EDUCATION -->
+    <section id="education">
+      <div class="section-label">Education</div>
+      <div class="list-items">
+        <div class="list-item">
+          <div>
+            <div class="list-item-main">Master of Science, Information Technology</div>
+            <div class="list-item-sub">University of Mary Hardin-Baylor · TX</div>
+          </div>
+          <span class="badge">2016</span>
+        </div>
+        <div class="list-item">
+          <div>
+            <div class="list-item-main">Bachelor of Science, Electrical Engineering</div>
+            <div class="list-item-sub">JNTU, India</div>
+          </div>
+          <span class="badge">2014</span>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <span>© 2026 Venkata Sharan</span>
+      <span>Columbus, OH</span>
+    </footer>
+
+  </div>
+</body>
+</html>
